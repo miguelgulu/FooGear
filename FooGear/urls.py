@@ -19,5 +19,9 @@ from FooGearApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
+    path('', views.catalogo, name='index'),
+    path('Camisetas/', views.camisetas, name='cami'),
+    path('Calzonas/', views.calzonas, name='calzo'),
+    path('Medias/', views.medias, name='medi'),
+    path('Sudaderas/', views.sudaderas, name='suda'),
 ]
