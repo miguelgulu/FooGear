@@ -5,13 +5,13 @@ def catalogo(request):
 	return HttpResponse("Aquí tienes los tipos de equipaciones %s." % Producto.choice_tipo)
 
 def camisetas(request):
-	return HttpResponse("Aquí tienes las camisetas.")
+	return HttpResponse("Aquí tienes las camisetas")
 
 def calzonas(request):
-	return HttpResponse("Aquí tienes las calzonas.")
+	return HttpResponse("Aquí tienes las calzonas")
 
 def medias(request):
-	return HttpResponse("Aquí tienes las medias.")
+	return HttpResponse("Aquí tienes las medias")
 
 def sudaderas(request):
-	return HttpResponse("Aquí tienes las sudaderas.")
+	return HttpResponse("Aquí tienes las sudaderas")
