@@ -9,6 +9,7 @@ class Stock(models.Model):
 		return self.idStock
 
 class Producto(models.Model):
+	idProducto=models.IntegerField()
 	choice_tipo = [('Camiseta', 'Camiseta'), ('Medias', 'Medias'), ('Calzonas','Calzonas'), ('Sudaderas','Sudaderas')]
 	choice_talla = [('XS','XS'), ('S','S'), ('M','M'), ('L','L'), ('XL','XL')]
 	idstock = models.ForeignKey(Stock, on_delete=models.CASCADE)
@@ -21,7 +22,7 @@ class Producto(models.Model):
 		return self.tipo, self.talla, self.cantidad	
 
 class Comprador(models.Model):
-	nombre=models.CharField(max_length=100)
+	nombre=models.CharField(max_length=100, primary_key=True)
 	telefono=models.IntegerField()
 	direccion=models.CharField(max_length=150)
 
