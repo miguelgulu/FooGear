@@ -3,13 +3,13 @@ from django.db import models
 # Create your models here.
 
 class Stock(models.Model): 
-	idStock = models.IntegerField()
+	idStock = models.IntegerField(primary_key=True)
 
 	def __int__(self):
 		return self.idStock
 
 class Producto(models.Model):
-	idProducto=models.IntegerField()
+	idProducto=models.IntegerField(primary_key=True)
 	choice_tipo = [('Camiseta', 'Camiseta'), ('Medias', 'Medias'), ('Calzonas','Calzonas'), ('Sudaderas','Sudaderas')]
 	choice_talla = [('XS','XS'), ('S','S'), ('M','M'), ('L','L'), ('XL','XL')]
 	idstock = models.ForeignKey(Stock, on_delete=models.CASCADE)
