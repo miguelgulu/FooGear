@@ -12,7 +12,7 @@ class Producto(models.Model):
 	idProducto=models.IntegerField(primary_key=True)
 	choice_tipo = [('Camiseta', 'Camiseta'), ('Medias', 'Medias'), ('Calzonas','Calzonas'), ('Sudaderas','Sudaderas')]
 	choice_talla = [('XS','XS'), ('S','S'), ('M','M'), ('L','L'), ('XL','XL')]
-	idstock = models.ForeignKey(Stock, on_delete=models.CASCADE)
+	stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
 	tipo = models.CharField(max_length=100, choices=choice_tipo) #Choice
 	talla = models.CharField(max_length=3, choices=choice_talla) #Choice
 	cantidad = models.IntegerField()
