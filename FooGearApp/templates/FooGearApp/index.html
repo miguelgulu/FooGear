@@ -1,0 +1,9 @@
+{% if listar_catalogo %}
+    <ul>
+    {% for tipo in listar_catalogo %}
+        <li><a href="/FooGearApp/{{ question.id }}/">{{ producto.tipo }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

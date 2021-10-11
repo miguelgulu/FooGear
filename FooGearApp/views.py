@@ -1,8 +1,9 @@
 from django.http import HttpResponse
-from FooGearApp.models import Stock, Producto, Comprador, Reserva
+from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
 
 def catalogo(request):
-	return HttpResponse("Aquí tienes los tipos de equipaciones %s." % Producto.choice_tipo)
+	listar_prendas = Producto.objects
+	return HttpResponse(listar_prendas)
 
 def camisetas(request):
 	return HttpResponse("Aquí tienes las camisetas")

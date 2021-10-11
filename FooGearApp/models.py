@@ -1,28 +1,39 @@
 from django.db import models
-
+from django.utils import timezone
 # Create your models here.
 
+hoy = timezone.now()
+
+class Tienda(models.Model):
+	direccion = models.CharField(max_length=100)
+	telefono = models.IntegerField()
+	correo = models.EmailField()
+
+
+#Añadir modelo y stock. Stock es la interrelacion de tienda y producto
+
 class Stock(models.Model): 
-	idStock = models.IntegerField(primary_key=True)
+	tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE, null=True)
+	cantidad = models.IntegerField()
 
 	def __int__(self):
-		return self.idStock
+		return self.cantidad
+
 
 class Producto(models.Model):
-	idProducto=models.IntegerField(primary_key=True)
 	choice_tipo = [('Camiseta', 'Camiseta'), ('Medias', 'Medias'), ('Calzonas','Calzonas'), ('Sudaderas','Sudaderas')]
 	choice_talla = [('XS','XS'), ('S','S'), ('M','M'), ('L','L'), ('XL','XL')]
 	stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
-	tipo = models.CharField(max_length=100, choices=choice_tipo) #Choice
-	talla = models.CharField(max_length=3, choices=choice_talla) #Choice
-	cantidad = models.IntegerField()
+	tipo = models.CharField(max_length=100, choices=choice_tipo)
+	talla = models.CharField(max_length=3, choices=choice_talla)
 	precio = models.IntegerField()
 
 	def __str__(self):
-		return self.tipo, self.talla, self.cantidad	
+		return self.tipo, self.talla, self.precio	
+
 
 class Comprador(models.Model):
-	nombre=models.CharField(max_length=100, primary_key=True)
+	nombre=models.CharField(max_length=100)
 	telefono=models.IntegerField()
 	direccion=models.CharField(max_length=150)
 
@@ -32,8 +43,10 @@ class Comprador(models.Model):
 class Reserva(models.Model):
 	producto=models.ManyToManyField(Producto)
 	comprador=models.ForeignKey(Comprador, on_delete=models.CASCADE)
-	idReserva=models.IntegerField()
-	fecha=models.DateTimeField()
+	tienda=models.ForeignKey(Tienda, on_delete=models.CASCADE, null=True)
+	fecha=models.DateTimeField('Fecha Reserva', null=True, default=hoy)
 
-	def __str__(self):
-		return self.idReserva        
+
+	def __repr__(self):
+		return "%s %s %s" % (self.producto, self.comprador, self.tienda)
+
