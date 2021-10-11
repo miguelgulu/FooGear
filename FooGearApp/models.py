@@ -9,15 +9,17 @@ class Tienda(models.Model):
 	telefono = models.IntegerField()
 	correo = models.EmailField()
 
+	def __str__(self):
+		return self.direccion
 
-#Añadir modelo y stock. Stock es la interrelacion de tienda y producto
 
 class Stock(models.Model): 
 	tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE, null=True)
+	clave_stock = models.CharField(max_length=100, null=True, default="e0001")
 	cantidad = models.IntegerField()
 
-	def __int__(self):
-		return self.cantidad
+	def __str__(self):
+		return self.clave_stock
 
 
 class Producto(models.Model):
@@ -29,7 +31,7 @@ class Producto(models.Model):
 	precio = models.IntegerField()
 
 	def __str__(self):
-		return self.tipo, self.talla, self.precio	
+		return "%s %s %s" % (self.tipo, self.talla, self.precio)
 
 
 class Comprador(models.Model):
@@ -47,6 +49,6 @@ class Reserva(models.Model):
 	fecha=models.DateTimeField('Fecha Reserva', null=True, default=hoy)
 
 
-	def __repr__(self):
-		return "%s %s %s" % (self.producto, self.comprador, self.tienda)
+	def __str__(self):
+		return str(self.fecha)
 
