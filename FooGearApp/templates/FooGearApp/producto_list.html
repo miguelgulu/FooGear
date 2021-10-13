@@ -4,7 +4,7 @@
     <h2>Productos</h2>
     <ul>
         {% for producto in object_list %}
-            <li>{{ producto.tipo }}  &nbsp;&nbsp;&nbsp;Talla: {{producto.talla}}  &nbsp;&nbsp;&nbsp; Precio: {{producto.precio}}€</li>
+            <li>{{ producto.tipo }}</li>
         {% endfor %}
     </ul>
 {% endblock %}
