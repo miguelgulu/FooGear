@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Reservas Realizadas</h2>
+    <ul>
+        {% for reserva in object_list %}
+            <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Productos: {{reserva.producto}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

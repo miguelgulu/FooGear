@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Tiendas</h2>
+    <ul>
+        {% for tienda in object_list %}
+            <li>Direccion: {{ tienda.direccion }}  &nbsp;&nbsp;&nbsp;Telefono: {{tienda.telefono}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

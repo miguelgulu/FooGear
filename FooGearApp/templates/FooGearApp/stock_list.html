@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Stocks Disponibles</h2>
+    <ul>
+        {% for stock in object_list %}
+            <li>{{ stock.tienda }}  &nbsp;&nbsp;&nbsp;Stock: {{stock.clave_stock}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

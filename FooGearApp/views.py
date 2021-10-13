@@ -1,18 +1,37 @@
+from django.shortcuts import get_object_or_404, get_list_or_404
 from django.http import HttpResponse
+from django.views.generic import ListView
 from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
 
-def catalogo(request):
-	listar_prendas = Producto.objects
-	return HttpResponse(listar_prendas)
+class TiendaListView(ListView):
+	model = Tienda
+	context_object_name= 'Tiendas'
 
-def camisetas(request):
-	return HttpResponse("Aquí tienes las camisetas")
+class StockListView(ListView):
+	model = Stock
+	context_object_name= 'Stocks Disponibles'
 
-def calzonas(request):
-	return HttpResponse("Aquí tienes las calzonas")
+class ProductoListView(ListView):
+	model = Producto
+	context_object_name= 'Productos'
 
-def medias(request):
-	return HttpResponse("Aquí tienes las medias")
+class CompradorListView(ListView):
+	model = Comprador
+	context_object_name= 'Compradores'
 
-def sudaderas(request):
-	return HttpResponse("Aquí tienes las sudaderas")
+class ReservaListView(ListView):
+	model = Reserva
+	context_object_name= 'Reserva'
+
+
+class StockProductoListView(ListView):
+	template_name = "FooGearApp/productos_de_stock.html"
+
+	def get_queryset(self):
+		self.stock = get_list_or_404(Producto, stock=self.kwargs['stock'])
+		return Producto.objects.filter(stock=self.stock)
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['Stock'] = self.stock
+		return context

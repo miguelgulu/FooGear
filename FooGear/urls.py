@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from FooGearApp import views
+from FooGearApp.views import StockListView, ReservaListView, CompradorListView, ProductoListView, TiendaListView, StockProductoListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.catalogo, name='index'),
-    path('Camisetas/', views.camisetas, name='cami'),
-    path('Calzonas/', views.calzonas, name='calzo'),
-    path('Medias/', views.medias, name='medi'),
-    path('Sudaderas/', views.sudaderas, name='suda'),
+    #path('', views.catalogo, name='index'),
+    path('tiendas/', TiendaListView.as_view()),
+    path('stock/', StockListView.as_view()),
+    path('productos/', ProductoListView.as_view()),
+    path('compradores/', CompradorListView.as_view()),
+    path('reservas/', ReservaListView.as_view()),
+    path('stock/<stock>/', StockProductoListView.as_view()),
 ]
