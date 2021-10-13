@@ -4,11 +4,9 @@
     <h2>Reservas Realizadas</h2>
     <ul>
         {% for reserva in object_list %}
-            <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}} &nbsp;&nbsp;&nbsp; 
-            {% for tems in product_list %}
-            <p>{{ objs_producto.tipo}}</p>
-            {% endfor %}
-            Productos: {{reserva.producto}}</li>
+            <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}} &nbsp;&nbsp;&nbsp; Productos: {{reserva.producto}}
+        </li>
+
         {% endfor %}
     </ul>
 {% endblock %}
