@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils import timezone
 # Create your models here.
@@ -46,9 +47,8 @@ class Reserva(models.Model):
 	producto=models.ManyToManyField(Producto)
 	comprador=models.ForeignKey(Comprador, on_delete=models.CASCADE)
 	tienda=models.ForeignKey(Tienda, on_delete=models.CASCADE, null=True)
+	clave=models.UUIDField(primary_key=True, default=uuid.uuid4)
 	fecha=models.DateTimeField('Fecha Reserva', null=True, default=hoy)
-
 
 	def __str__(self):
 		return str(self.fecha)
-

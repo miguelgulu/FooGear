@@ -21,7 +21,7 @@ class CompradorListView(ListView):
 
 class ReservaListView(ListView):
 	model = Reserva
-	context_object_name= 'Reserva'
+
 
 
 class StockProductoListView(ListView):

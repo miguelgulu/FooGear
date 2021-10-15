@@ -3,6 +3,7 @@
 {% block content %}
     <h2>Reservas Realizadas</h2>
     <ul>
+        {{ reservas }}
         {% for reserva in object_list %}
             <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}} &nbsp;&nbsp;&nbsp; Productos: {{reserva.producto}}
         </li>
