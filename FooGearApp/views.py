@@ -1,7 +1,8 @@
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
+from .forms import ReservaPro
 
 class TiendaListView(ListView):
 	model = Tienda
@@ -23,18 +24,20 @@ class ReservaListView(ListView):
 	model = Reserva
 
 
+class ProductoReservaListView(ListView):
 
-class StockProductoListView(ListView):
-	template_name = "FooGearApp/productos_de_stock.html"
+	template_name = 'FooGearApp/productos_reserva.html'
 
 	def get_queryset(self):
-		self.stock = get_list_or_404(Producto, stock=self.kwargs['clave_stock'])
-		return Producto.objects.filter(stock=self.stock)
+		self.reserva = get_object_or_404(Reserva, clave=self.kwargs['reserva'])
+		return Producto.objects.filter(publisher=self.reserva)
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['Stock'] = self.stock
+		context['reserva'] = self.reserva
 		return context
+
+
 
 class ProductoDetailView(DetailView):
 	queryset = Producto.objects.all()
@@ -43,3 +46,8 @@ class ProductoDetailView(DetailView):
 		obj = super().get_object()
 		obj.save()
 		return obj
+
+def Form_reserva(request):
+    context = {}
+    context['form'] = ReservaPro()
+    return render( request, "templates/FooGearApp/encargo.html", context)

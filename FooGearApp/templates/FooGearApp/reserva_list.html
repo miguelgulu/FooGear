@@ -5,7 +5,12 @@
     <ul>
         {{ reservas }}
         {% for reserva in object_list %}
-            <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}} &nbsp;&nbsp;&nbsp; Productos: {{reserva.producto}}
+            <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}} &nbsp;&nbsp;&nbsp; Productos: {{ context }}
+            {% for objs_producto in producto.objects.all %}
+            <p>{{ objs_producto.tipo }}</p>
+            <p>{{ objs_producto.talla }}</p>
+            {% endfor %}
+
         </li>
 
         {% endfor %}

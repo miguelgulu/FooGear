@@ -51,4 +51,5 @@ class Reserva(models.Model):
 	fecha=models.DateTimeField('Fecha Reserva', null=True, default=hoy)
 
 	def __str__(self):
-		return str(self.fecha)
+		return "%s, %s, %s" % (self.comprador, self.tienda, self.clave)
+
