@@ -28,16 +28,26 @@ class ProductoReservaListView(ListView):
 
 	template_name = 'FooGearApp/productos_reserva.html'
 
-	def get_queryset(self):
-		self.reserva = get_object_or_404(Reserva, clave=self.kwargs['reserva'])
-		return Producto.objects.filter(publisher=self.reserva)
+	model = Reserva
+
+	dicc = {}
+
 
 	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		context['reserva'] = self.reserva
-		return context
+		dicc = {}
+		r = Reserva.objects.all()[0]
+		dicc[r]= r.producto.all()
+		return dicc
 
+"""
 
+	def get_context_data(self, **kwargs):
+		for i in range()
+		dicc = {}
+		r = Reserva.objects.all()[0]
+		dicc[r]= r.producto.all()
+		return dicc
+"""
 
 class ProductoDetailView(DetailView):
 	queryset = Producto.objects.all()

@@ -27,5 +27,5 @@ urlpatterns = [
     path('reservas/', ReservaListView.as_view()),
     path('reservas/<reserva>', ProductoReservaListView.as_view()),
     path('productos/<int:pk>/', ProductoDetailView.as_view(), name='product-detail'),
-    path('encargame/', Form_reserva),
+    path('', Form_reserva)
 ]

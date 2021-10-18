@@ -2,4 +2,13 @@
 
 {% block content %}
 
+{{ dicc }}
+
+ {% for reserva in reserva_list %}
+      <li>
+        <a href="{{ Reserva.get_absolute_url }}">{{ reserva.producto }}</a> ({{ reserva.clave }})
+      </li>
+{% endfor %}
+
+
 {% endblock %}
