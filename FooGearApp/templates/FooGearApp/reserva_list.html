@@ -5,7 +5,7 @@
     <ul>
         {{ reservas }}
         {% for reserva in object_list %}
-            <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}        </li>
+            <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp; <a href="{{ reserva.clave }}"> Clave: {{reserva.clave}} </a></li>
 
         {% endfor %}
     </ul>

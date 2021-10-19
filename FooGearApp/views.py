@@ -24,30 +24,13 @@ class ReservaListView(ListView):
 	model = Reserva
 
 
-class ProductoReservaListView(ListView):
+class ReservaDetailView(DetailView):
 
-	template_name = 'FooGearApp/productos_reserva.html'
+	context_object_name = 'reserva-detail'
+	queryset = Reserva.objects.all()
 
-	model = Reserva
-
-	dicc = {}
-
-
-	def get_context_data(self, **kwargs):
-		dicc = {}
-		r = Reserva.objects.all()[0]
-		dicc[r]= r.producto.all()
-		return dicc
-
-"""
-
-	def get_context_data(self, **kwargs):
-		for i in range()
-		dicc = {}
-		r = Reserva.objects.all()[0]
-		dicc[r]= r.producto.all()
-		return dicc
-"""
+	def get_value_in_qs(queryset, key):
+		return queryset.values(key, flat=True)
 
 class ProductoDetailView(DetailView):
 	queryset = Producto.objects.all()
