@@ -32,7 +32,7 @@ class Producto(models.Model):
 	precio = models.IntegerField()
 
 	def __str__(self):
-		return "%s %s %s" % (self.tipo, self.talla, self.precio)
+		return "Tipo: %s | Talla: %s | Precio: %s" % (self.tipo, self.talla, self.precio)
 
 
 class Comprador(models.Model):

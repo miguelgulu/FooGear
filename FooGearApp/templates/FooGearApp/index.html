@@ -1,9 +1,23 @@
-{% if listar_catalogo %}
-    <ul>
-    {% for tipo in listar_catalogo %}
-        <li><a href="/FooGearApp/{{ question.id }}/">{{ producto.tipo }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Bienvenido a FooGear. Aquí podrás visualizar los siguientes contenidos:</h1>
+      <li>
+       <a href="/tiendas/">Tiendas</a>
+      </li>
+      <li>
+       <a href="/stock/">Stocks</a>
+      </li>
+      <li>
+       <a href="/productos/">Productos</a>
+      </li>
+      <li>
+       <a href="/reservas/">Reservas</a>
+      </li>
+      <li>
+       <a href="/compradores/">Compradores</a>
+      </li>
+
+
+
+{% endblock %}

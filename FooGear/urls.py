@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from FooGearApp.views import Form_reserva, StockListView, ReservaDetailView, ReservaListView, CompradorListView, ProductoListView, TiendaListView, ProductoDetailView 
+from FooGearApp.views import index, StockListView, ReservaDetailView, ReservaListView, CompradorListView, ProductoListView, TiendaListView, ProductoDetailView 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', views.catalogo, name='index'),
+    path('', index, name='index'),
     path('tiendas/', TiendaListView.as_view()),
     path('stock/', StockListView.as_view()),
     path('productos/', ProductoListView.as_view()),
@@ -27,5 +27,4 @@ urlpatterns = [
     path('reservas/', ReservaListView.as_view()),
     path('reservas/<str:pk>', ReservaDetailView.as_view(), name='reserva-detail'),
     path('productos/<int:pk>/', ProductoDetailView.as_view(), name='product-detail'),
-    path('', Form_reserva),
 ]

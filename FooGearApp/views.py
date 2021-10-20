@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
-from .forms import ReservaPro
+from django.template import loader
 
 class TiendaListView(ListView):
 	model = Tienda
@@ -23,6 +23,10 @@ class CompradorListView(ListView):
 class ReservaListView(ListView):
 	model = Reserva
 
+def index(request):
+	template = loader.get_template('FooGearApp/index.html')
+	return HttpResponse(template.render())
+
 
 class ReservaDetailView(DetailView):
 
@@ -40,7 +44,3 @@ class ProductoDetailView(DetailView):
 		obj.save()
 		return obj
 
-def Form_reserva(request):
-    context = {}
-    context['form'] = ReservaPro()
-    return render( request, "templates/FooGearApp/encargo.html", context)
