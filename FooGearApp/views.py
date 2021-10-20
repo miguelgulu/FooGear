@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
 from django.template import loader
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from FooGearApp.forms import ReservaForm
+from django.urls import reverse_lazy
+
 
 class TiendaListView(ListView):
 	model = Tienda
@@ -44,3 +48,17 @@ class ProductoDetailView(DetailView):
 		obj.save()
 		return obj
 
+class ReservaCreateView(CreateView):
+	model = Reserva
+
+	form_class = ReservaForm
+	success_url = reverse_lazy('reserva-view')
+
+class ReservaUpdateView(UpdateView):
+	model = Reserva
+	form_class = ReservaForm
+	success_url = reverse_lazy('reserva-view')
+
+class ReservaDeleteView(DeleteView):
+    model = Reserva
+    success_url = reverse_lazy('reserva-view')

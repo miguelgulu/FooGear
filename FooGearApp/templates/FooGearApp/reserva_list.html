@@ -5,8 +5,11 @@
     <ul>
         {{ reservas }}
         {% for reserva in object_list %}
-            <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}} </a></li>
+            <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
+               &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></li>
 
         {% endfor %}
+        <br></br>
+        <a href="{% url 'reserva-add' %}">Pulsa aquí para hacer una reserva</a>
     </ul>
 {% endblock %}

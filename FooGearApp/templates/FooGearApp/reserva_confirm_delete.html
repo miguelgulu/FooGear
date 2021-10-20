@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div>
+  	<h2>¿Estás seguro que quieres eliminar tu reserva?</h2>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <button type="submit">Si, acepto</button>
+      <a href="{% url 'reserva-view' %}">Cancelar</a>
+    </form>
+  </div>
+
+{% endblock %}

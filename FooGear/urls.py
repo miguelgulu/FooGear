@@ -15,16 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from FooGearApp.views import index, StockListView, ReservaDetailView, ReservaListView, CompradorListView, ProductoListView, TiendaListView, ProductoDetailView 
+from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView 
+from FooGearApp.views import ReservaDetailView, ProductoDetailView 
+from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('tiendas/', TiendaListView.as_view()),
-    path('stock/', StockListView.as_view()),
-    path('productos/', ProductoListView.as_view()),
-    path('compradores/', CompradorListView.as_view()),
-    path('reservas/', ReservaListView.as_view()),
+    path('tiendas/', TiendaListView.as_view(), name='tiendas-view'),
+    path('stock/', StockListView.as_view(), name='stock-view'),
+    path('productos/', ProductoListView.as_view(), name='producto-view'),
+    path('compradores/', CompradorListView.as_view(), name='comprador-view'),
+    path('reservas/', ReservaListView.as_view(), name='reserva-view'),
     path('reservas/<str:pk>', ReservaDetailView.as_view(), name='reserva-detail'),
     path('productos/<int:pk>/', ProductoDetailView.as_view(), name='product-detail'),
+    path('reservas/add/', ReservaCreateView.as_view(), name='reserva-add'),
+    path('reservas/<str:pk>/update', ReservaUpdateView.as_view(), name='reserva-update'),
+    path('reservas/<str:pk>/delete/', ReservaDeleteView.as_view(), name='reserva-delete'),
 ]
