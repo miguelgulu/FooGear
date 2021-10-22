@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your models here.
 
 hoy = timezone.now()
@@ -20,7 +21,7 @@ class Stock(models.Model):
 	cantidad = models.IntegerField()
 
 	def __str__(self):
-		return self.clave_stock
+		return self.clave_stock, "Id stock: %s" % (str(self.id))
 
 
 class Producto(models.Model):
@@ -32,10 +33,11 @@ class Producto(models.Model):
 	precio = models.IntegerField()
 
 	def __str__(self):
-		return "Tipo: %s | Talla: %s | Precio: %s" % (self.tipo, self.talla, self.precio)
+		return "Id producto: %s | Tipo: %s | Talla: %s | Precio: %s" % (str(self.id), self.tipo, self.talla, self.precio)
 
 
 class Comprador(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	nombre=models.CharField(max_length=100)
 	telefono=models.IntegerField()
 	direccion=models.CharField(max_length=150)

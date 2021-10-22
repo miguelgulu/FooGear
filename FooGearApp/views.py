@@ -4,8 +4,9 @@ from django.views.generic import ListView, DetailView
 from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
 from django.template import loader
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from FooGearApp.forms import ReservaForm
+from FooGearApp.forms import ReservaForm, UserForm
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 
 
 class TiendaListView(ListView):
@@ -47,6 +48,13 @@ class ProductoDetailView(DetailView):
 		obj = super().get_object()
 		obj.save()
 		return obj
+
+class UserCreateView(CreateView):
+	model = User
+	form_class = UserForm
+	success_url = reverse_lazy('comprador-view')
+
+
 
 class ReservaCreateView(CreateView):
 	model = Reserva

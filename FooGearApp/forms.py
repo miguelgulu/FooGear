@@ -1,5 +1,6 @@
 from django import forms
 from FooGearApp.models import Reserva
+from django.contrib.auth.models import User
 
 # class AnimalForm(forms.Form):
 # 	nom = forms.CharField(required=True)
@@ -10,3 +11,8 @@ class ReservaForm(forms.ModelForm):
 	class Meta:
 		model = Reserva
 		exclude = ['clave', 'fecha', 'stock']
+
+class UserForm(forms.ModelForm):
+	class Meta:
+		model = User
+		exclude = ['mail'] 

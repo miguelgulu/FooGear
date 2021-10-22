@@ -2,9 +2,13 @@
 
 {% block content %}
 <h2> Productos de la Reserva {{ object.clave }}</h2>
-      <li>
-       {{ object.producto.all }}
-      </li>
+      
+       {% for reserva in object.producto.all %}
+            <li>Tipo: {{ reserva.tipo }}</li>
+            <li>Talla: {{ reserva.talla }}</li>
+            <li>Precio: {{ reserva.precio }}€</li>
+       {% endfor %}
+      
 
 
 {% endblock %}

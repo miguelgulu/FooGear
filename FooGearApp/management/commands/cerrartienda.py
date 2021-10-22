@@ -1,20 +1,21 @@
 from django.core.management.base import BaseCommand, CommandError
 from FooGearApp.models import Tienda
 
-class CierraTienda(BaseCommand):
-    help = 'Selecciona la tienda que quieras cerrar'
+class Command(BaseCommand):
+    help = 'Cierra la tienda especificada'
 
     def add_arguments(self, parser):
-        parser.add_argument('Tienda_ids', nargs='+', type=int)
+        parser.add_argument('tienda_ids', nargs='+', type=int)
+
 
     def handle(self, *args, **options):
-        for Tienda_id in options['Tienda_ids']:
+        for tienda_id in options['tienda_ids']:
             try:
-                Tienda = Tienda.objects.get(pk=Tienda_id)
+                tienda = Tienda.objects.get(pk=tienda_id)
             except Tienda.DoesNotExist:
-                raise CommandError('No existe la tienda "%s"' % Tienda_id)
+                raise CommandError('Tienda "%s" no existe' % tienda_id)
 
-            Tienda.opened = False
-            Tienda.save()
+            tienda.delete()
 
-            self.stdout.write(self.style.SUCCESS('Tienda "%s" cerrada con éxito' % Tienda_id))
+
+            self.stdout.write(self.style.SUCCESS('Cerrada con éxito la tienda "%s"' % tienda_id))

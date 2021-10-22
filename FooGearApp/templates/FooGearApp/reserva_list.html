@@ -3,7 +3,6 @@
 {% block content %}
     <h2>Reservas Realizadas</h2>
     <ul>
-        {{ reservas }}
         {% for reserva in object_list %}
             <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
                &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></li>
