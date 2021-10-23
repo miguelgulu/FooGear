@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView 
+from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView
 from FooGearApp.views import ReservaDetailView, ProductoDetailView 
-from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, UserCreateView
+from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, CompradorCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +29,7 @@ urlpatterns = [
     path('reservas/', ReservaListView.as_view(), name='reserva-view'),
     path('reservas/<str:pk>', ReservaDetailView.as_view(), name='reserva-detail'),
     path('productos/<int:pk>/', ProductoDetailView.as_view(), name='product-detail'),
-    path('compradores/add/', UserCreateView.as_view(), name='comprador-add'),
+    path('compradores/add/', CompradorCreateView.as_view(), name='comprador-add'),
     path('reservas/add/', ReservaCreateView.as_view(), name='reserva-add'),
     path('reservas/<str:pk>/update', ReservaUpdateView.as_view(), name='reserva-update'),
     path('reservas/<str:pk>/delete/', ReservaDeleteView.as_view(), name='reserva-delete'),

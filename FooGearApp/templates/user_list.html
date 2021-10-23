@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Compradores</h2>
+    <ul>
+        {% for user in object_list %}
+            <li>Nickname: {{ user.username }}  &nbsp;&nbsp;&nbsp;Dirección: {{user.direccion}} &nbsp;&nbsp;&nbsp;Teléfono: {{comprador.direccion}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

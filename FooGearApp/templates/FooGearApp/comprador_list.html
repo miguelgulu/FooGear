@@ -4,7 +4,7 @@
     <h2>Compradores</h2>
     <ul>
         {% for comprador in object_list %}
-            <li>Nombre: {{ comprador.nombre }}  &nbsp;&nbsp;&nbsp;Dirección: {{comprador.direccion}} &nbsp;&nbsp;&nbsp;Teléfono: {{comprador.direccion}}</li>
+            <li>Username: {{ comprador.user.username }} &nbsp;&nbsp;&nbsp;Email: {{comprador.user.email}} &nbsp;&nbsp;&nbsp;Fecha de creación: {{comprador.user.date_joined}} &nbsp;&nbsp;&nbsp;Dirección: {{comprador.direccion}} &nbsp;&nbsp;&nbsp;Teléfono: {{comprador.telefono}} &nbsp;&nbsp;&nbsp; Nombre: {{ comprador.nombre}}</li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from FooGearApp.models import Reserva
+from FooGearApp.models import Reserva, Comprador
 from django.contrib.auth.models import User
 
 # class AnimalForm(forms.Form):
@@ -12,7 +12,7 @@ class ReservaForm(forms.ModelForm):
 		model = Reserva
 		exclude = ['clave', 'fecha', 'stock']
 
-class UserForm(forms.ModelForm):
+class CompradorForm(forms.ModelForm):
 	class Meta:
-		model = User
-		exclude = ['mail'] 
+		model = Comprador
+		fields = ['user','nombre', 'direccion', 'telefono']
