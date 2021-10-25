@@ -6,7 +6,9 @@ from django.template import loader
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from FooGearApp.forms import ReservaForm, CompradorForm
 from django.urls import reverse_lazy
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 class TiendaListView(ListView):
@@ -71,3 +73,16 @@ class ReservaUpdateView(UpdateView):
 class ReservaDeleteView(DeleteView):
     model = Reserva
     success_url = reverse_lazy('reserva-view')
+
+
+def login_view(request):
+	if request.method == 'POST':
+		form = AuthenticationForm(data=request.POST)
+		if form.is_valid():
+			return redirect('FooGearApp/reserva_list.html')
+	else:
+		form = AuthenticationForm()
+	return render(request, 'FooGearApp/login.html', {'form':form})
+
+def logout_view(request):
+    logout(request)
