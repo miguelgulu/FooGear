@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView
 from FooGearApp.views import ReservaDetailView, ProductoDetailView 
-from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, CompradorCreateView
+from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, UserCreateView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -30,9 +30,9 @@ urlpatterns = [
     path('reservas/', ReservaListView.as_view(), name='reserva-view'),
     path('reservas/<str:pk>', ReservaDetailView.as_view(), name='reserva-detail'),
     path('productos/<int:pk>/', ProductoDetailView.as_view(), name='product-detail'),
-    path('compradores/add/', CompradorCreateView.as_view(), name='comprador-add'),
+    path('compradores/add/', UserCreateView.as_view(), name='comprador-add'),
     path('reservas/add/', ReservaCreateView.as_view(), name='reserva-add'),
     path('reservas/<str:pk>/update', ReservaUpdateView.as_view(), name='reserva-update'),
     path('reservas/<str:pk>/delete/', ReservaDeleteView.as_view(), name='reserva-delete'),
-    path('FooGearApp/login/', auth_views.LoginView.as_view(), name='login'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
 ]

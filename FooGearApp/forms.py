@@ -12,7 +12,7 @@ class ReservaForm(forms.ModelForm):
 		model = Reserva
 		exclude = ['clave', 'fecha', 'stock']
 
-class CompradorForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
 	class Meta:
-		model = Comprador
-		fields = ['user','nombre', 'direccion', 'telefono']
+		model = User
+		fields = ['username', 'password', 'email']
