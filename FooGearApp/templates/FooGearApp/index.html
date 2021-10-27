@@ -25,5 +25,10 @@
       <li>
       Inicia sesión <a href="{% url 'login' %}">aquí</a> para acceder a más contenido
       </li>
+      {% if user.is_authenticated %}
+      <li>
+      Haz click <a href="{% url 'logout' %}">aquí</a> para cerrar sesión
+      </li>
+      {% endif %}
 
 {% endblock %}

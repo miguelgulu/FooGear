@@ -7,4 +7,6 @@
             <li> <a href="{{ producto.id }}/">{{ producto.tipo }}</a></li>
         {% endfor %}
     </ul>
+
+    <ul><a href="{% url 'index' %}">Volver a index</a></ul>
 {% endblock %}

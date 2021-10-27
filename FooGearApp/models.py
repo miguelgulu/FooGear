@@ -15,25 +15,24 @@ class Tienda(models.Model):
 		return self.direccion
 
 
-class Stock(models.Model): 
-	tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE, null=True)
-	clave_stock = models.CharField(max_length=100, null=True, default="e0001")
-	cantidad = models.IntegerField()
-
-	def __str__(self):
-		return self.clave_stock, "Id stock: %s" % (str(self.id))
-
-
 class Producto(models.Model):
 	choice_tipo = [('Camiseta', 'Camiseta'), ('Medias', 'Medias'), ('Calzonas','Calzonas'), ('Sudaderas','Sudaderas')]
 	choice_talla = [('XS','XS'), ('S','S'), ('M','M'), ('L','L'), ('XL','XL')]
-	stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
 	tipo = models.CharField(max_length=100, choices=choice_tipo)
 	talla = models.CharField(max_length=3, choices=choice_talla)
 	precio = models.IntegerField()
 
 	def __str__(self):
-		return "Id producto: %s | Tipo: %s | Talla: %s | Precio: %s" % (str(self.id), self.tipo, self.talla, self.precio)
+		return self.tipo
+
+class Stock(models.Model): 
+	tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE, null=True)
+	producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+	clave_stock = models.CharField(max_length=100, null=True, default="e0001")
+	cantidad = models.IntegerField()
+
+	def __str__(self):
+		return self.clave_stock
 
 
 class Comprador(models.Model):

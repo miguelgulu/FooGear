@@ -1,20 +1,26 @@
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
-from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
-from django.template import loader
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from FooGearApp.forms import ReservaForm, UserForm
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
+from django.template import loader
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
+from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
+from FooGearApp.forms import ReservaForm, UserForm
+
 
 
 class TiendaListView(ListView):
 	model = Tienda
 	context_object_name= 'Tiendas'
+	permission_required = ('Tienda.view_choice', 'Tienda.change_choice')
 
 class StockListView(ListView):
 	model = Stock
@@ -47,12 +53,8 @@ class ReservaDetailView(DetailView):
 		return queryset.values(key, flat=True)
 
 class ProductoDetailView(DetailView):
-	queryset = Producto.objects.all()
+	model = Producto
 
-	def get_object(self):
-		obj = super().get_object()
-		obj.save()
-		return obj
 @method_decorator(login_required, name='dispatch')
 class UserCreateView(CreateView):
 	model = User
@@ -81,10 +83,15 @@ def login_view(request):
 	if request.method == 'POST':
 		form = AuthenticationForm(data=request.POST)
 		if form.is_valid():
-			return redirect('FooGearApp/reserva_list.html')
+			return redirect('FooGearApp/index.html')
 	else:
 		form = AuthenticationForm()
 	return render(request, 'FooGearApp/login.html', {'form':form})
 
 def logout_view(request):
     logout(request)
+
+
+def error_404(request, exception):
+        data = {}
+        return render(request,'FooGearApp/404.html', data)
