@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.shortcuts import get_object_or_404, get_list_or_404, render, redirect
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
@@ -6,11 +6,12 @@ from django.utils.decorators import method_decorator
 from django.template import loader
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-
-from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
 
 from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
 from FooGearApp.forms import ReservaForm, UserForm
@@ -88,6 +89,7 @@ def login_view(request):
 		form = AuthenticationForm()
 	return render(request, 'FooGearApp/login.html', {'form':form})
 
+
 def logout_view(request):
     logout(request)
 
@@ -95,3 +97,18 @@ def logout_view(request):
 def error_404(request, exception):
         data = {}
         return render(request,'FooGearApp/404.html', data)
+
+def change_password(request):
+	if request.method == 'POST':
+		form = PasswordChangeForm(request.user, request.POST)
+		if form.is_valid():
+			user = form.save()
+			update_session_auth_hash(request, user)
+			user.save()
+			messages.success(request, 'Tu contraseña ha sido actualizada!')
+			return redirect('FooGearApp/index.html')
+		else:
+			messages.error(request, 'Por favor, comprueba bien los campos.')
+	else:
+		form = PasswordChangeForm(request.user)
+	return render(request, 'FooGearApp/change_password.html', {'form': form})

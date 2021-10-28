@@ -18,17 +18,21 @@
        <a href="/compradores/">Compradores</a>
       </li>
       <ul></ul>
-
+      <br></br>
       <li>
         No tienes cuenta? <a href="{% url 'comprador-add' %}">Hazte una aquí</a>
       </li>
+      <br></br>
       <li>
       Inicia sesión <a href="{% url 'login' %}">aquí</a> para acceder a más contenido
       </li>
-      {% if user.is_authenticated %}
+      <br></br>
       <li>
       Haz click <a href="{% url 'logout' %}">aquí</a> para cerrar sesión
       </li>
-      {% endif %}
+      <br></br>
+      <li>
+      Haz click <a href="{% url 'change-password' %}">aquí</a> para cambiar tu contraseña
+      </li>
 
 {% endblock %}

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView
 from FooGearApp.views import ReservaDetailView, ProductoDetailView 
-from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, UserCreateView
+from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, UserCreateView, change_password
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 
@@ -37,6 +37,7 @@ urlpatterns = [
     path('reservas/<str:pk>/delete/', ReservaDeleteView.as_view(), name='reserva-delete'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path("logout/", LogoutView.as_view(), name="logout"),
+    path("password/", change_password, name="change-password"),
 ]
 
 handler404 = 'FooGearApp.views.error_404'
