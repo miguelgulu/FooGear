@@ -41,8 +41,7 @@ class ReservaListView(ListView):
 	model = Reserva
 
 def index(request):
-	template = loader.get_template('FooGearApp/index.html')
-	return HttpResponse(template.render())
+	return render(request, 'FooGearApp/index.html')
 
 @method_decorator(login_required, name='dispatch')
 class ReservaDetailView(DetailView):
@@ -56,7 +55,7 @@ class ReservaDetailView(DetailView):
 class ProductoDetailView(DetailView):
 	model = Producto
 
-@method_decorator(login_required, name='dispatch')
+
 class UserCreateView(CreateView):
 	model = User
 	form_class = UserForm

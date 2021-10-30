@@ -3,11 +3,19 @@
 {% block content %}
     <h2>Reservas Realizadas</h2>
     <ul>
+        {% if user.is_staff %}
         {% for reserva in object_list %}
             <li>Comprador: {{ reserva.comprador }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
                &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></li>
 
         {% endfor %}
+        {% endif %}
+        {% if not user.is_staff %}
+            {% for reserva in object.comprador %}
+            <li>Comprador: {{ reserva.username }}  &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
+               &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></li>
+            {% endfor %}
+        {% endif %}
         <br></br>
         <a href="{% url 'reserva-add' %}">Pulsa aquí para hacer una reserva</a>
     </ul>

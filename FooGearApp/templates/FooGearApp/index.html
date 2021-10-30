@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Bienvenido a FooGear. Aquí podrás visualizar los siguientes contenidos:</h1>
+<h1>Bienvenido a FooGear {{ user.username }}. Aquí podrás visualizar los siguientes contenidos:</h1>
       <li>
        <a href="/tiendas/">Tiendas</a>
       </li>
@@ -12,27 +12,32 @@
        <a href="/productos/">Productos</a>
       </li>
       <li>
-       <a href="/reservas/">Reservas</a>
-      </li>
-      <li>
        <a href="/compradores/">Compradores</a>
       </li>
-      <ul></ul>
+      {% if user.is_authenticated %}
+      <li>
+       <a href="/reservas/">Reservas</a>
+      </li>
+      {% endif %}
       <br></br>
+      {% if not user.is_authenticated %}
       <li>
         No tienes cuenta? <a href="{% url 'comprador-add' %}">Hazte una aquí</a>
       </li>
+      
       <br></br>
       <li>
       Inicia sesión <a href="{% url 'login' %}">aquí</a> para acceder a más contenido
       </li>
       <br></br>
+      {% endif %}
+      {% if user.is_authenticated %}
       <li>
       Haz click <a href="{% url 'logout' %}">aquí</a> para cerrar sesión
       </li>
-      <br></br>
+      <br></br> 
       <li>
       Haz click <a href="{% url 'change-password' %}">aquí</a> para cambiar tu contraseña
       </li>
-
+      {% endif %}
 {% endblock %}
