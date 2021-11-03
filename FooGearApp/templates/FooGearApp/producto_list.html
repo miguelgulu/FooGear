@@ -4,7 +4,7 @@
     <h2>Productos</h2>
     <ul>
         {% for producto in object_list %}
-            <li> <a href="{{ producto.id }}/">{{ producto.tipo }}</a></li>
+            <ul> <a href="{{ producto.id }}/">{{ producto.tipo }}</a></ul>
         {% endfor %}
     </ul>
 

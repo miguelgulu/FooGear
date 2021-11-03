@@ -4,7 +4,7 @@
     <h2>Tiendas</h2>
     <ul>
         {% for tienda in object_list %}
-            <li>Direccion: {{ tienda.direccion }}  &nbsp;&nbsp;&nbsp;Telefono: {{tienda.telefono}}</li>
+            <ul>Direccion: {{ tienda.direccion }}  &nbsp;&nbsp;&nbsp;Telefono: {{tienda.telefono}}</ul>
         {% endfor %}
     </ul>
     <ul><a href="{% url 'index' %}">Volver a index</a></ul>

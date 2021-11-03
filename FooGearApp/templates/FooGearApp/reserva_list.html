@@ -5,15 +5,15 @@
     <ul>
         {% if user.is_staff %}
         {% for reserva in object_list %}
-            <li>Usuario: {{ reserva.comprador.user }} &nbsp;&nbsp;&nbsp; Nombre: {{ reserva.comprador }} &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
-               &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></li>
+            <ul>Usuario: {{ reserva.comprador.user }} &nbsp;&nbsp;&nbsp; Nombre: {{ reserva.comprador }} &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
+               &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></ul>
 
         {% endfor %}
         {% else %}
         {% for reserva in object_list %}
             {% if user == reserva.comprador.user %}
-                <li>Usuario: {{ reserva.comprador.user }} &nbsp;&nbsp;&nbsp; Nombre: {{ reserva.comprador }} &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
-                &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></li>
+                <ul>Usuario: {{ reserva.comprador.user }} &nbsp;&nbsp;&nbsp; Nombre: {{ reserva.comprador }} &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
+                &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></ul>
             {% endif %}
         {% endfor %}
         {% endif %}

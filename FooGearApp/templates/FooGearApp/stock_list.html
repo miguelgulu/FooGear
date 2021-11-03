@@ -4,7 +4,7 @@
     <h2>Stocks Disponibles</h2>
     <ul>
         {% for stock in object_list %}
-            <li>{{ stock.tienda }}  &nbsp;&nbsp;&nbsp;Stock: {{stock.clave_stock}} Producto: {{stock.producto}} </li>
+            <ul>{{ stock.tienda }}  &nbsp;&nbsp;&nbsp;Stock: {{stock.clave_stock}} Producto: {{stock.producto}} </ul>
         {% endfor %}
     </ul>
     <ul><a href="{% url 'index' %}">Volver a index</a></ul>

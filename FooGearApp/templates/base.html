@@ -5,17 +5,37 @@
   {% block title %}<title>FooGear</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
 </head>
 
 
 <body>
-
-  <div class="container-fluid">
+  <header>
+    <div id="navbarHeader" class="collapse bg-dark">
+    </div>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+    {% if not user.is_authenticated %}
+    <p style="color:white;">
+        No tienes cuenta? <a style="color:green;" href="{% url 'comprador-add' %}">Hazte una aquí</a>
+    </p>
+    <p style="color:white;">
+      Inicia sesión <a style="color:green;" href="{% url 'login' %}">aquí</a> para acceder a más contenido
+    </p>
+    {% endif %}
+    {% if user.is_authenticated %}
+      <p style="color:white;">
+      Haz click <a style="color:green;" href="{% url 'logout' %}">aquí</a> para cerrar sesión
+      </p>
+      <p style="color:white;">
+      Haz click <a style="color:green;" href="{% url 'change-password' %}">aquí</a> para cambiar tu contraseña
+      </p>
+    {% endif %}
+    </div>
+  </header>
+  <div class="jumbotron text-center">
 
       {% block content %}
    
@@ -24,5 +44,7 @@
     </div>
 
   </div>
+  <footer>
+  </footer>
 </body>
 </html>

@@ -3,8 +3,8 @@
 {% block content %}
     <h2>Detalles de {{ producto.tipo }}</h2>
     <ul>
-        <li>Talla: {{ producto.talla }}</li>
-        <li>Precio: {{ producto.precio }}</li>
+        <ul>Talla: {{ producto.talla }}</ul>
+        <ul>Precio: {{ producto.precio }}</ul>
     </ul>
 
     <ul><a href="{% url 'index' %}">Volver a index</a></ul>
