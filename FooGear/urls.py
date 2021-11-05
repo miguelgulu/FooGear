@@ -21,6 +21,22 @@ from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDelete
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 
+from FooGearApp.models import Producto
+from rest_framework import routers, serializers, viewsets
+
+class ProductoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Producto
+        fields = ['tipo', 'talla', 'precio']
+
+
+class ProductoViewSet(viewsets.ModelViewSet):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+
+router = routers.DefaultRouter()
+router.register(r'productos', ProductoViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
@@ -38,6 +54,8 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("password/", change_password, name="change-password"),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 handler404 = 'FooGearApp.views.error_404'

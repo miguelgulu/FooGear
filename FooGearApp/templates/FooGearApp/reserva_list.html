@@ -10,6 +10,7 @@
 
         {% endfor %}
         {% else %}
+        <h3>Aquí solo verás tus reservas</h3>
         {% for reserva in object_list %}
             {% if user == reserva.comprador.user %}
                 <ul>Usuario: {{ reserva.comprador.user }} &nbsp;&nbsp;&nbsp; Nombre: {{ reserva.comprador }} &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
