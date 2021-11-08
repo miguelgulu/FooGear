@@ -17,9 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView
 from FooGearApp.views import ReservaDetailView, ProductoDetailView 
-from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, UserCreateView, change_password
+from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, UserCreateView, change_password, login_view
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LogoutView, LoginView
 
 from FooGearApp.models import Producto
 from rest_framework import routers, serializers, viewsets
@@ -51,10 +51,11 @@ urlpatterns = [
     path('reservas/add/', ReservaCreateView.as_view(), name='reserva-add'),
     path('reservas/<str:pk>/update', ReservaUpdateView.as_view(), name='reserva-update'),
     path('reservas/<str:pk>/delete/', ReservaDeleteView.as_view(), name='reserva-delete'),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
+    #path('accounts/', include('django.contrib.auth.urls')),
+    path('login/', login_view, name='login'),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("password/", change_password, name="change-password"),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 

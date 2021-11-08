@@ -1,9 +1,37 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 {% block content %}
-    <h1>Log In</h1>
-    <form class="site-form" action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Login">
-    </form>
+
+{% if form.errors %}
+<p style="margin-top: 40px;">Tu nombre no coincide con ninguno de la base datos. Introduce otro.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p style="margin-top: 60px;">No tienes acceso a la página. Inserta un nombre que pueda acceder.</p>
+    {% else %}
+    <p>Por favor, inserta tu nombre de usuario.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+<div style="margin-top: 40px;">
+  <td>{{ form.username.label_tag }}</td>
+  <td>{{ form.username }}</td>
+</div>
+<div>
+  <td>{{ form.password.label_tag }}</td>
+  <td>{{ form.password }}</td>
+</div>
+
+<div>
+  <input type="submit" value="login" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</div>
+</form>
+
+<p><a href="{% url 'password_reset' %}">¿Has olvidado tu contraseña?</a></p>
+
 {% endblock %}
