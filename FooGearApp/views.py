@@ -16,7 +16,7 @@ from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm, Us
 from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
 from FooGearApp.forms import ReservaForm, UserForm
 
-
+# -------------- Vistas genéricas -----------------
 
 class TiendaListView(ListView):
 	model = Tienda
@@ -43,6 +43,8 @@ class ReservaListView(ListView):
 def index(request):
 	return render(request, 'FooGearApp/index.html')
 
+# -------------- Vistas detalle -----------------
+
 @method_decorator(login_required(login_url='/accounts/login/'), name='dispatch')
 class ReservaDetailView(DetailView):
 
@@ -55,26 +57,28 @@ class ReservaDetailView(DetailView):
 class ProductoDetailView(DetailView):
 	model = Producto
 
+# -------------- Formularios de registro -----------------
 
 def register(request):
 	if request.method == 'POST':
 		form = UserForm(request.POST)
 		if form.is_valid():
 			#form.save()
-			username = form.cleaned_data.get('username')
-			raw_password = form.cleaned_data.get('password')
-			email = form.cleaned_data.get('email')
-			nombre = form.cleaned_data.get('nombre')
-			telefono = form.cleaned_data.get('telefono')
-			direccion = form.cleaned_data.get('direccion')
-			user = form.save()
+			obj = User()
+			obj.username = form.cleaned_data.get('username')
+			obj.password = form.cleaned_data.get('password')
+			obj.email = form.cleaned_data.get('email')
+			obj.nombre = form.cleaned_data.get('nombre')
+			obj.telefono = form.cleaned_data.get('telefono')
+			obj.direccion = form.cleaned_data.get('direccion')
+			user = obj.save()
 			login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 			return redirect('index')
 	else:
  		form = UserForm()
 	return render(request, 'FooGearApp/register.html', {'form': form})
 
-
+# -------------- Vistas de actualización -----------------
 
 @method_decorator(login_required(login_url='/accounts/login/'), name='dispatch')
 class ReservaCreateView(CreateView):
@@ -93,12 +97,14 @@ class ReservaDeleteView(DeleteView):
     model = Reserva
     success_url = reverse_lazy('reserva-view')
 
-
+# -------------- Vista error -----------------
 
 def error_404(request, exception):
         data = {}
         return render(request,'FooGearApp/404.html', data)
 
+
+# -------------- Cambio de contraseña -----------------
 
 def change_password(request):
 	if request.method == 'POST':
@@ -114,6 +120,8 @@ def change_password(request):
 	else:
 		form = PasswordChangeForm(request.user)
 	return render(request, 'FooGearApp/change_password.html', {'form': form})
+
+# -------------- Buscador de tiendas -----------------
 
 def search_tienda(request):
 	if request.method == "POST":
