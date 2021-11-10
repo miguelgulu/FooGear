@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <center>
+    {% if searched %}
+        <h1>Has buscado {{ searched }}</h1>
+        <br></br>
+        {% for tienda in tiendas %}
+            {{ tienda }}<br></br>
+        {% endfor %}
+    {% else %}
+    <h1>Se te ha olvidado especificar la búsqueda!</h1>
+    {% endif %}
+    </center>
+{% endblock %}
+ 

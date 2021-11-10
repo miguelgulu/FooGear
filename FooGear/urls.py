@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView
 from FooGearApp.views import ReservaDetailView, ProductoDetailView 
-from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, UserCreateView, change_password, login_view
+from FooGearApp.views import ReservaCreateView, ReservaUpdateView, ReservaDeleteView, register, change_password
+from FooGearApp.views import search_tienda
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView, LoginView
 
@@ -47,16 +48,18 @@ urlpatterns = [
     path('reservas/', ReservaListView.as_view(), name='reserva-view'),
     path('reservas/<str:pk>', ReservaDetailView.as_view(), name='reserva-detail'),
     path('productos/<int:pk>/', ProductoDetailView.as_view(), name='product-detail'),
-    path('compradores/add/', UserCreateView.as_view(), name='comprador-add'),
+    path('register/', register, name='register'),
+    #path('compradores/add/', UserCreateView.as_view(), name='comprador-add'),
     path('reservas/add/', ReservaCreateView.as_view(), name='reserva-add'),
     path('reservas/<str:pk>/update', ReservaUpdateView.as_view(), name='reserva-update'),
     path('reservas/<str:pk>/delete/', ReservaDeleteView.as_view(), name='reserva-delete'),
-    #path('accounts/', include('django.contrib.auth.urls')),
-    path('login/', login_view, name='login'),
-    path("logout/", LogoutView.as_view(), name="logout"),
+    path('accounts/', include('django.contrib.auth.urls')),
+    #path('login/', login_view, name='login'),
+    #path("logout/", LogoutView.as_view(), name="logout"),
     path("password/", change_password, name="change-password"),
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('search_tienda', search_tienda, name='search_tienda'),
 ]
 
 handler404 = 'FooGearApp.views.error_404'

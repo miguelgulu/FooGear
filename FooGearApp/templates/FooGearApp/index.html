@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="jumbotron text-center">
 {% if not user.is_authenticated %}
 <h1>Bienvenido a FooGear. Aquí podrás visualizar los siguientes contenidos</h1>
 {% else %}
 <h1>Bienvenido a FooGear {{ user }}. Aquí podrás visualizar los siguientes contenidos</h1>
 {% endif %}
+</div>
       <ul>
        <a href="/tiendas/">Tiendas</a>
       </ul>
@@ -15,33 +18,14 @@
       <ul>
        <a href="/productos/">Productos</a>
       </ul>
+      {% if user.is_staff %}
       <ul>
        <a href="/compradores/">Compradores</a>
       </ul>
+      {% endif %}
       {% if user.is_authenticated %}
       <ul>
        <a href="/reservas/">Reservas</a>
       </ul>
       {% endif %}
-      <br></br>
-  <!--   {% if not user.is_authenticated %}
-      <li>
-        No tienes cuenta? <a href="{% url 'comprador-add' %}">Hazte una aquí</a>
-      </li>
-      
-      <br></br>
-      <li>
-      Inicia sesión <a href="{% url 'login' %}">aquí</a> para acceder a más contenido
-      </li>
-      <br></br>
-      {% endif %}
-      {% if user.is_authenticated %}
-      <li>
-      Haz click <a href="{% url 'logout' %}">aquí</a> para cerrar sesión
-      </li>
-      <br></br> 
-      <li>
-      Haz click <a href="{% url 'change-password' %}">aquí</a> para cambiar tu contraseña
-      </li>
-      {% endif %}--> 
 {% endblock %}
