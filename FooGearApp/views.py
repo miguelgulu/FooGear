@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm, UserCreationForm
 
 from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
-from FooGearApp.forms import ReservaForm, UserForm
+from FooGearApp.forms import ReservaForm, CompradorCreationForm
 
 # -------------- Vistas genéricas -----------------
 
@@ -61,22 +61,19 @@ class ProductoDetailView(DetailView):
 
 def register(request):
 	if request.method == 'POST':
-		form = UserForm(request.POST)
-		if form.is_valid():
-			#form.save()
-			obj = User()
-			obj.username = form.cleaned_data.get('username')
-			obj.password = form.cleaned_data.get('password')
-			obj.email = form.cleaned_data.get('email')
-			obj.nombre = form.cleaned_data.get('nombre')
-			obj.telefono = form.cleaned_data.get('telefono')
-			obj.direccion = form.cleaned_data.get('direccion')
-			user = obj.save()
-			login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+		uform = UserCreationForm(request.POST)
+		cform = CompradorCreationForm(request.POST)
+		if uform.is_valid() and cform.is_valid():
+			user = uform.save(commit=False)
+			comprador = cform.save(commit=False)
+			comprador.user = user
+			uform.save()
+			cform.save()
 			return redirect('index')
 	else:
- 		form = UserForm()
-	return render(request, 'FooGearApp/register.html', {'form': form})
+		uform = UserCreationForm()
+		cform = CompradorCreationForm()
+	return render(request, 'FooGearApp/register.html', {'uform': uform, 'cform': cform})
 
 # -------------- Vistas de actualización -----------------
 

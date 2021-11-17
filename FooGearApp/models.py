@@ -37,12 +37,12 @@ class Stock(models.Model):
 
 class Comprador(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	nombre=models.CharField(max_length=100)
+	dni=models.CharField(max_length=10)
 	telefono=models.IntegerField()
 	direccion=models.CharField(max_length=150)
 
 	def __str__(self):
-		return self.nombre
+		return self.user
 
 class Reserva(models.Model):
 	producto=models.ManyToManyField(Producto)

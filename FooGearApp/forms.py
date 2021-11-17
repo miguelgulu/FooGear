@@ -8,17 +8,10 @@ class ReservaForm(forms.ModelForm):
 		model = Reserva
 		exclude = ['clave', 'fecha', 'stock', 'comprador']
 
-class UserForm(forms.ModelForm):
-	email = forms.EmailField(widget=forms.EmailInput, help_text='Obligatorio')
-	password = forms.CharField(max_length=254, widget=forms.PasswordInput)
-	
-	nombre = forms.CharField(required = True)
-	telefono = forms.IntegerField(required = True)
-	direccion = forms.CharField(required = True)
-
+class CompradorCreationForm(forms.ModelForm):
 	class Meta:
-		model = User
-		fields = ('username', 'email', 'password', 'nombre', 'telefono', 'direccion')
+		model = Comprador
+		fields = ('dni', 'telefono', 'direccion')
 """
 	def save(self, commit=True):
 		user = super(UserForm, self).save(commit=False)
