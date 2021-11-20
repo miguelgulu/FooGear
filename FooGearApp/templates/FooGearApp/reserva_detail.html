@@ -1,12 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2> Productos de la Reserva {{ object.clave }}</h2>
-      
+<h2> Productos de la Reserva {{ object.clave }} del usuario {{ object.user }}</h2>
+
+ <br></br>
+<table border="1" align="center">
+  <tr>
+    <th span="1" style="width: 40%;">Tipo</th>
+    <th span="1" style="width: 20%;">Talla</th>
+    <th span="1" style="width: 20%;">Precio</th>
+  </tr>
+  {% for reserva in object.producto.all %}
+  <tr>
+    <td>{{ reserva.tipo }}</a></td>
+    <td>{{ reserva.talla }}</a></td>
+    <td>{{ reserva.precio }} €</a></td>
+  </tr>
+  {% endfor %}
+</table> 
+<!--
        {% for reserva in object.producto.all %}
             <ul>Tipo: {{ reserva.tipo }} &nbsp;&nbsp;&nbsp;  Talla: {{ reserva.talla }} &nbsp;&nbsp;&nbsp; Precio: {{ reserva.precio }}€</ul>
        {% endfor %}
       
 
      <ul><a href="{% url 'index' %}">Volver a index</a></ul>
+-->
 {% endblock %}

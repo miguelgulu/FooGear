@@ -6,11 +6,10 @@
     <form action="" method="POST">
       {% csrf_token %}
 
-      {{ form }}
+      {{ form.as_p }}
 
       <input type="submit" value="Reservar">
       <input type="reset" value="Borrar">
     </form>
   </div>
-  <ul><a href="{% url 'index' %}">Volver a index</a></ul>
 {% endblock %}

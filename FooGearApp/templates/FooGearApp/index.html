@@ -2,12 +2,16 @@
 
 {% block content %}
 
-<div class="jumbotron text-center">
+
+
 {% if not user.is_authenticated %}
-<h1>Bienvenido a FooGear. Aquí podrás visualizar los siguientes contenidos</h1>
+<h2>¡Bienvenido a FooGear! Si quieres acceder a más contenido inicia sesión</h2>
 {% else %}
-<h1>Bienvenido a FooGear {{ user }}. Aquí podrás visualizar los siguientes contenidos</h1>
+<h2>¡Bienvenido a FooGear {{ user }}!</h2>
 {% endif %}
+
+<!--
+
 </div>
       <ul>
        <a href="/tiendas/">Tiendas</a>
@@ -29,3 +33,5 @@
       </ul>
       {% endif %}
 {% endblock %}
+
+-->

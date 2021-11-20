@@ -2,6 +2,18 @@
 
 {% block content %}
     <h2>Productos</h2>
+    <br></br>
+    <table border="1" align="center">
+  <tr>
+    <th span="1" style="width: 30%;">Nombre</th>
+  </tr>
+  {% for producto in object_list %}
+  <tr>
+    <td><a href="{{ producto.id }}/">{{ producto.tipo }}</a></td>
+  </tr>
+  {% endfor %}
+</table> 
+<!--
     <ul>
         {% for producto in object_list %}
             <li> <a href="{{ producto.id }}/">{{ producto.tipo }}</a></li>
@@ -9,4 +21,5 @@
     </ul>
 
     <ul><a href="{% url 'index' %}">Volver a index</a></ul>
+-->
 {% endblock %}

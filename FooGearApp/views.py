@@ -67,6 +67,8 @@ def register(request):
 			user = uform.save(commit=False)
 			comprador = cform.save(commit=False)
 			comprador.user = user
+			email = cform.cleaned_data.get('email')
+			user.email = email
 			uform.save()
 			cform.save()
 			return redirect('index')
@@ -77,11 +79,21 @@ def register(request):
 
 # -------------- Vistas de actualización -----------------
 
-@method_decorator(login_required(login_url='/accounts/login/'), name='dispatch')
-class ReservaCreateView(CreateView):
-	model = Reserva
-	form_class = ReservaForm
-	success_url = reverse_lazy('reserva-view')
+
+@login_required
+def reserva(request):
+	if request.method == 'POST':
+		form = ReservaForm(request.POST)
+		if form.is_valid():
+			reserva = form.save(commit=False)
+			reserva.user = request.user
+			form.save()
+			return redirect('index')
+	else:
+		form = ReservaForm()
+	return render(request, 'FooGearApp/reserva_form.html', {'form': form})
+
+
 
 @method_decorator(login_required(login_url='/accounts/login/'), name='dispatch')
 class ReservaUpdateView(UpdateView):
@@ -132,7 +144,7 @@ def search_tienda(request):
 
 
 
-
+# -------------- Código basura -----------------
 
 
 
@@ -168,4 +180,12 @@ def login_view(request):
 """
 def logout_view(request):
     logout(request)
+"""
+
+"""
+@method_decorator(login_required(login_url='/accounts/login/'), name='dispatch')
+class ReservaCreateView(CreateView):
+	model = Reserva
+	form_class = ReservaForm
+	success_url = reverse_lazy('reserva-view')
 """

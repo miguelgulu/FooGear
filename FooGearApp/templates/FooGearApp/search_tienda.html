@@ -4,6 +4,22 @@
     <center>
     {% if searched %}
         <h1>Has buscado {{ searched }}</h1>
+<br></br>
+    <table border="1" align="center" style="text-align: center;">
+  <tr>
+    <th span="1" style="width: 100%;">Tienda</th>
+  </tr>
+  {% for tienda in tiendas %}
+  <tr>
+    <td>{{ tienda }}</td>
+  </tr>
+  {% endfor %}
+</table> 
+  {% else %}
+    <h1>Se te ha olvidado especificar la búsqueda!</h1>
+  {% endif %}
+<!--
+    {% if searched %}
         <br></br>
         {% for tienda in tiendas %}
             {{ tienda }}<br></br>
@@ -12,5 +28,6 @@
     <h1>Se te ha olvidado especificar la búsqueda!</h1>
     {% endif %}
     </center>
+-->
 {% endblock %}
  

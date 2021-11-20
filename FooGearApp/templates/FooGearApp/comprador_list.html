@@ -1,7 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
+
     <h2>Compradores</h2>
+    <br></br>
+  <table border="1" align="center">
+  <tr>
+    <th>Username</th>
+    {% if user.is_staff %}
+    <th>Email</th>
+    <th>Dirección</th>
+    <th>Teléfono</th>
+    <th>DNI</th>
+    {% endif %}
+  </tr>
+  {% for comprador in object_list %}
+  <tr>
+    <td>{{ comprador.user.username }}</td>
+    {% if user.is_staff %}
+    <td>{{comprador.user.email}}</td>
+    <td>{{comprador.direccion}}</td>
+    <td>{{comprador.telefono}}</td>
+    <td>{{comprador.dni}}</td>
+    {% endif %}
+  </tr>
+  {% endfor %}
+</table> 
+
+<!--
     <ul>
         {% for comprador in object_list %}
             <ul>Username: {{ comprador.user.username }} {% if user.is_staff %} &nbsp;&nbsp;&nbsp;Email: {{comprador.user.email}} &nbsp;&nbsp;&nbsp;Fecha de creación: {{comprador.user.date_joined}} &nbsp;&nbsp;&nbsp;Dirección: {{comprador.direccion}} &nbsp;&nbsp;&nbsp;Teléfono: {{comprador.telefono}} &nbsp;&nbsp;&nbsp; DNI: {{ comprador.dni}} {% endif %}</ul>
@@ -9,4 +35,5 @@
     </ul>
 
     <ul><a href="{% url 'index' %}">Volver a index</a></ul>
+-->
 {% endblock %}

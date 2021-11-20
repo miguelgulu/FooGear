@@ -2,10 +2,23 @@
 
 {% block content %}
     <h2>Detalles de {{ producto.tipo }}</h2>
+<br></br>
+<table border="1" align="center" width="500px">
+  <tr>
+    <th span="1" style="width: 50%;">Talla</th>
+    <th span="1" style="width: 50%;">Precio</th>
+  </tr>
+  <tr>
+    <td>{{ producto.talla }}</td>
+    <td>{{ producto.precio }}</td>
+  </tr>
+</table> 
+<!--
     <ul>
         <ul>Talla: {{ producto.talla }}</ul>
         <ul>Precio: {{ producto.precio }}</ul>
     </ul>
 
     <ul><a href="{% url 'index' %}">Volver a index</a></ul>
+-->
 {% endblock %}

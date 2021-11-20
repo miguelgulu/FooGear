@@ -5,14 +5,80 @@
   {% block title %}<title>FooGear</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/stylefinal.css' %}">
 </head>
 
-
 <body>
+
+<div class="topnav">
+  <a class="active" href="{% url 'index' %}">Index</a>
+  {% if not user.is_authenticated %}
+  <a href="{% url 'register' %}">Regístrate</a>
+  <a href="{% url 'login' %}">Login</a> 
+  {% else %}
+  <a href="{% url 'logout' %}">Logout</a>
+  <a href="{% url 'change-password' %}">Cambiar contraseña</a>
+  {% endif %}
+  <form class="form-inline my-2 my-md-0" method="POST" style="text-align: right;" action="{% url 'search_tienda' %}">
+    {% csrf_token %}
+    <input class="form-control" type="search" placeholder="Buscar Tienda" aria-label="Search" name="searched">
+    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+  </form>
+</div>
+
+<br></br>
+
+<div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>FOOGEAR</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>Secciones</p>
+                <li>
+                    <a href="/tiendas/">Tiendas</a>
+                </li>
+                 <li>
+                    <a href="/stock/">Stocks</a>
+                </li>
+                 <li>
+                    <a href="/productos/">Productos</a>
+                </li>
+                {% if user.is_authenticated %}
+                 {% if user.is_staff %}
+                 <li>
+                    <a href="/compradores/">Compradores</a>
+                </li>
+                 {% endif %}
+                {% endif %}
+                {% if user.is_authenticated %}
+                 <li>
+                    <a href="/reservas/">Reservas</a>
+                </li>
+                {% endif %}
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://github.com/miguelgulu/FooGear" class="download">Repositorio Github</a>
+                </li>
+        </nav>
+
+
+<!--
+<div style="padding-left:16px">
+  <h2>Top Navigation Example</h2>
+  <p>Some content..</p>
+</div>
+
+</body>
+</html>
+
 
     <div id="navbarHeader" class="collapse bg-dark">
       <div class="navbar navbar-dark bg-dark box-shadow">
@@ -33,11 +99,13 @@
         </form>
       </div> 
     </div>
+-->
 
+<div class="container-fluid" style="text-align: center;">
       {% block content %}
    
       {% endblock %}
-      
+</div>
  
 
   </div>

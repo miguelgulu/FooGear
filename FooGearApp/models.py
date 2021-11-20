@@ -42,15 +42,15 @@ class Comprador(models.Model):
 	direccion=models.CharField(max_length=150)
 
 	def __str__(self):
-		return self.user
+		return self.dni
 
 class Reserva(models.Model):
 	producto=models.ManyToManyField(Producto)
-	comprador=models.ForeignKey(Comprador, on_delete=models.CASCADE)
+	user=models.ForeignKey(User, on_delete=models.CASCADE)
 	tienda=models.ForeignKey(Tienda, on_delete=models.CASCADE, null=True)
 	clave=models.UUIDField(primary_key=True, default=uuid.uuid4)
 	fecha=models.DateTimeField('Fecha Reserva', null=True, default=hoy)
 
 	def __str__(self):
-		return "%s, %s, %s" % (self.comprador, self.tienda, self.clave)
+		return "%s, %s, %s" % (self.user.username, self.tienda, self.clave)
 
