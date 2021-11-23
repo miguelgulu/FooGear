@@ -16,10 +16,8 @@ class Tienda(models.Model):
 
 
 class Producto(models.Model):
-	choice_tipo = [('Camiseta', 'Camiseta'), ('Medias', 'Medias'), ('Calzonas','Calzonas'), ('Sudaderas','Sudaderas')]
-	choice_talla = [('XS','XS'), ('S','S'), ('M','M'), ('L','L'), ('XL','XL')]
-	tipo = models.CharField(max_length=100, choices=choice_tipo)
-	talla = models.CharField(max_length=3, choices=choice_talla)
+	tipo = models.CharField(max_length=100)
+	marca = models.CharField(max_length=100)
 	precio = models.IntegerField()
 
 	def __str__(self):
