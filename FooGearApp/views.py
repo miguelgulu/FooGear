@@ -87,6 +87,7 @@ def reserva(request):
 		if form.is_valid():
 			reserva = form.save(commit=False)
 			reserva.user = request.user
+			#compra = reserva.producto
 			form.save()
 			return redirect('index')
 	else:

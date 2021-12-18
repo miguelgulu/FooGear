@@ -28,7 +28,7 @@ from rest_framework import routers, serializers, viewsets
 class ProductoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Producto
-        fields = ['tipo', 'talla', 'precio']
+        fields = ['tipo', 'marca', 'precio']
 
 
 class ProductoViewSet(viewsets.ModelViewSet):
