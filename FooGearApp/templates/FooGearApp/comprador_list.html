@@ -8,7 +8,6 @@
   <tr>
     <th>Username</th>
     {% if user.is_staff %}
-    <th>Email</th>
     <th>Dirección</th>
     <th>Teléfono</th>
     <th>DNI</th>
@@ -18,7 +17,6 @@
   <tr>
     <td>{{ comprador.user.username }}</td>
     {% if user.is_staff %}
-    <td>{{comprador.user.email}}</td>
     <td>{{comprador.direccion}}</td>
     <td>{{comprador.telefono}}</td>
     <td>{{comprador.dni}}</td>
