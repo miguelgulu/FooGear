@@ -108,7 +108,7 @@ footer {
 *, ::after, ::before {
     box-sizing: border-box;
 }
-
+/*
 @media (min-width: 48em) {
 
     .header,
@@ -135,10 +135,13 @@ footer {
         left: 150px;
     }
 }
-
-@media (max-width: 48em) {
-    #layout.active {
-        position: relative;
-        left: 150px;
+*/
+@media screen and (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
     }
-}
+    .sidebar ul {float: left;}
+    div.content {margin-left: 0;}
+  }

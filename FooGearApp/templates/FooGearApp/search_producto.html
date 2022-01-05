@@ -7,11 +7,11 @@
 <br></br>
     <table border="1" align="center" style="text-align: center;">
   <tr>
-    <th span="1" style="width: 100%;">Tienda</th>
+    <th span="1" style="width: 100%;">Productos</th>
   </tr>
-  {% for tienda in tiendas %}
+  {% for producto in productos %}
   <tr>
-    <td>{{ tienda }}</td>
+    <td><a href="{% url 'product-detail' producto.pk %}">{{ producto }}</a></td>
   </tr>
   {% endfor %}
 </table> 

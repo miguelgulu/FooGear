@@ -16,15 +16,17 @@
 <div class="topnav">
   <a class="active" href="{% url 'index' %}">Index</a>
   {% if not user.is_authenticated %}
+  <a style="color: white;">¡Eres un usuario invitado!</a>
   <a href="{% url 'register' %}">Regístrate</a>
   <a href="{% url 'login' %}">Login</a> 
   {% else %}
+  <a style="color: white;">¡Estás conectado como {{ user }}!</a>
   <a href="{% url 'logout' %}">Logout</a>
   <a href="{% url 'change-password' %}">Cambiar contraseña</a>
   {% endif %}
-  <form class="form-inline my-2 my-md-0" method="POST" style="text-align: right;" action="{% url 'search_tienda' %}">
+  <form class="form-inline my-2 my-md-0" method="POST" style="text-align: right;" action="{% url 'search_producto' %}">
     {% csrf_token %}
-    <input class="form-control" type="search" placeholder="Buscar Tienda" aria-label="Search" name="searched">
+    <input class="form-control" type="search" placeholder="Buscar producto" aria-label="Search" name="searched">
     <button class="btn btn-outline-secondary" type="submit">Buscar</button>
   </form>
 </div>
@@ -70,36 +72,6 @@
         </nav>
 
 
-<!--
-<div style="padding-left:16px">
-  <h2>Top Navigation Example</h2>
-  <p>Some content..</p>
-</div>
-
-</body>
-</html>
-
-
-    <div id="navbarHeader" class="collapse bg-dark">
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <p style="color:white;"><a style="color:white;" href="{% url 'index' %}">INDEX DE FOOGEAR</a></p>
-      {% if not user.is_authenticated %}
-        <p style="color:white;">No tienes cuenta? <a style="color:green;" href="{% url 'register' %}">Hazte una aquí</a></p>
-        <p style="color:white;">Inicia sesión <a style="color:green;" href="{% url 'login' %}">aquí</a> para acceder a más contenido</p>
-      {% endif %}
-        
-      {% if user.is_authenticated %}
-        <p style="color:white;">Haz click <a style="color:green;" href="{% url 'logout' %}">aquí</a> para cerrar sesión</p>
-        <p style="color:white;">Haz click <a style="color:green;" href="{% url 'change-password' %}">aquí</a> para cambiar tu contraseña</p>
-      {% endif %}
-        <form class="d-flex" method="POST" action="{% url 'search_tienda' %}">
-          {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Buscar Tienda" aria-label="Search" name="searched">
-          <button class="btn btn-outline-secondary" type="submit">Buscar</button>
-        </form>
-      </div> 
-    </div>
--->
 
 <div class="container-fluid" style="text-align: center;">
       {% block content %}

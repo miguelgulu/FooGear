@@ -10,6 +10,13 @@
 <h2>¡Bienvenido a FooGear {{ user }}!</h2>
 {% endif %}
 
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <ul{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</ul>
+    {% endfor %}
+</ul>
+{% endif %}
 <!--
 
 </div>

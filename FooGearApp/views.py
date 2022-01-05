@@ -89,6 +89,7 @@ def reserva(request):
 			reserva.user = request.user
 			#compra = reserva.producto
 			form.save()
+			messages.success(request, '¡Reserva realizada con éxito!')
 			return redirect('index')
 	else:
 		form = ReservaForm()
@@ -133,60 +134,14 @@ def change_password(request):
 
 # -------------- Buscador de tiendas -----------------
 
-def search_tienda(request):
+def search_producto(request):
 	if request.method == "POST":
 		searched = request.POST['searched']
-		tiendas = Tienda.objects.filter(direccion__contains=searched)
-		return render(request, 'FooGearApp/search_tienda.html', {'searched': searched, 'tiendas': tiendas})
+		productos = Producto.objects.filter(tipo__contains=searched)
+		return render(request, 'FooGearApp/search_producto.html', {'searched': searched, 'productos': productos})
 	else:
-		return render(request, 'FooGearApp/search_tienda.html', {})
+		return render(request, 'FooGearApp/search_producto.html', {})
 
 
 
 
-
-# -------------- Código basura -----------------
-
-
-
-"""
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, f"Estás logueado como {username}")
-                return redirect('/')
-            else:
-                messages.error(request, "Usuario o contraseña no válidos.")
-        else:
-            messages.error(request, "Usuario o contraseña no válidos.")
-    form = AuthenticationForm()
-    return render(request = request, template_name = "FooGearApp/login.html", context={"form":form})
-
-
-def login_view(request):
-	if request.method == 'POST':
-		form = AuthenticationForm(data=request.POST)
-		if form.is_valid():
-			return redirect('FooGearApp/index.html')
-	else:
-		form = AuthenticationForm()
-	return render(request, 'FooGearApp/login.html', {'form':form})
-"""
-"""
-def logout_view(request):
-    logout(request)
-"""
-
-"""
-@method_decorator(login_required(login_url='/accounts/login/'), name='dispatch')
-class ReservaCreateView(CreateView):
-	model = Reserva
-	form_class = ReservaForm
-	success_url = reverse_lazy('reserva-view')
-"""

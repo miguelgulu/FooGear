@@ -18,7 +18,7 @@ from django.urls import path, include
 from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView
 from FooGearApp.views import ReservaDetailView, ProductoDetailView 
 from FooGearApp.views import reserva, ReservaUpdateView, ReservaDeleteView, register, change_password
-from FooGearApp.views import search_tienda
+from FooGearApp.views import search_producto
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView, LoginView
 
@@ -59,7 +59,7 @@ urlpatterns = [
     path("password/", change_password, name="change-password"),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('search_tienda', search_tienda, name='search_tienda'),
+    path('search_producto/', search_producto, name='search_producto'),
 ]
 
 handler404 = 'FooGearApp.views.error_404'
