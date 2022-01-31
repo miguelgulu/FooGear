@@ -13,10 +13,3 @@ class CompradorCreationForm(forms.ModelForm):
 		model = Comprador
 		fields = ('dni', 'telefono', 'direccion', 'email')
 
-"""
-	def save(self, commit=True):
-		user = super(UserForm, self).save(commit=False)
-		if commit:
-			user.save()
-		return user
-"""

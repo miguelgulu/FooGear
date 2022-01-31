@@ -17,28 +17,17 @@
     {% endfor %}
 </ul>
 {% endif %}
-<!--
 
-</div>
-      <ul>
-       <a href="/tiendas/">Tiendas</a>
-      </ul>
-      <ul>
-       <a href="/stock/">Stocks</a>
-      </ul>
-      <ul>
-       <a href="/productos/">Productos</a>
-      </ul>
-      {% if user.is_staff %}
-      <ul>
-       <a href="/compradores/">Compradores</a>
-      </ul>
-      {% endif %}
-      {% if user.is_authenticated %}
-      <ul>
-       <a href="/reservas/">Reservas</a>
-      </ul>
-      {% endif %}
+<br></br>
+
+<h3>Mira nuestro catálogo de productos</h3>
+<br></br>
+{% for producto in producto_gen %}
+    <a>{{ producto }}</a> 
+    <a href="{% url 'product-detail' producto.pk %}">
+    <td><img src="/media/{{ producto.imagen }}"  width="300" height="300"></td>
+    </a>
+    &nbsp;
+{% endfor %}
+
 {% endblock %}
-
--->

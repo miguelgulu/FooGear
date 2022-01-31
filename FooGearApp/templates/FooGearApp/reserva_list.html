@@ -37,29 +37,7 @@
   {% endfor %}
   {% endif %}
 </table> 
-<!--
-    <ul>
-        {% if user.is_staff %}
-        {% for reserva in object_list %}
-            <ul>Usuario: {{ reserva.comprador.user }} &nbsp;&nbsp;&nbsp; Nombre: {{ reserva.user }} &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
-               &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></ul>
-
-        {% endfor %}
-        {% else %}
-        <h3>Aquí solo verás tus reservas</h3>
-        {% for reserva in object_list %}
-            {% if user == reserva.user %}
-                <ul>Usuario: {{ reserva.user }} &nbsp;&nbsp;&nbsp; Nombre: {{ reserva.user }} &nbsp;&nbsp;&nbsp;Tienda: {{reserva.tienda}}    &nbsp;&nbsp;&nbsp;Fecha: {{reserva.fecha}}    &nbsp;&nbsp;&nbsp;Producto: {{reserva.fecha}}  &nbsp;&nbsp;&nbsp;  Clave: <a href="{{ reserva.clave }}">{{reserva.clave}}  &nbsp;&nbsp; <a href="{% url 'reserva-update' reserva.pk %}">Editar</a>
-                &nbsp; <a href="{% url 'reserva-delete' reserva.pk %}">Borrar</a></a></ul>
-            {% endif %}
-        {% endfor %}
-        {% endif %}
-
-        <br></br>
-        <a href="{% url 'reserva-add' %}">Pulsa aquí para hacer una reserva</a>
-    </ul>
-    <ul><a href="{% url 'index' %}">Volver a index</a></ul>
--->
+ 
     <br></br>
     <a href="{% url 'reserva-add' %}">Pulsa aquí para hacer una reserva</a>
 {% endblock %}

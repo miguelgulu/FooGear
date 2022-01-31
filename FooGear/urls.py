@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView
+from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView, products_index
 from FooGearApp.views import ReservaDetailView, ProductoDetailView 
 from FooGearApp.views import reserva, ReservaUpdateView, ReservaDeleteView, register, change_password
 from FooGearApp.views import search_producto
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView, LoginView
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 from FooGearApp.models import Producto
 from rest_framework import routers, serializers, viewsets
@@ -40,7 +43,7 @@ router.register(r'productos', ProductoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
+    path('', products_index, name='index'),
     path('tiendas/', TiendaListView.as_view(), name='tiendas-view'),
     path('stock/', StockListView.as_view(), name='stock-view'),
     path('productos/', ProductoListView.as_view(), name='producto-view'),
@@ -52,7 +55,7 @@ urlpatterns = [
     #path('compradores/add/', UserCreateView.as_view(), name='comprador-add'),
     path('reservas/add/', reserva, name='reserva-add'),
     path('reservas/<str:pk>/update', ReservaUpdateView.as_view(), name='reserva-update'),
-    path('reservas/<str:pk>/delete/', ReservaDeleteView.as_view(), name='reserva-delete'),
+    path('reservas/<str:pk>/delete/', ReservaDeleteView, name='reserva-delete'),
     path('accounts/', include('django.contrib.auth.urls')),
     #path('login/', login_view, name='login'),
     #path("logout/", LogoutView.as_view(), name="logout"),
@@ -60,6 +63,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('search_producto/', search_producto, name='search_producto'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'FooGearApp.views.error_404'

@@ -9,12 +9,14 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm, UserCreationForm
 
 from FooGearApp.models import Stock, Producto, Comprador, Reserva, Tienda
 from FooGearApp.forms import ReservaForm, CompradorCreationForm
+
+import operator
 
 # -------------- Vistas genéricas -----------------
 
@@ -103,7 +105,9 @@ class ReservaUpdateView(UpdateView):
 	form_class = ReservaForm
 	success_url = reverse_lazy('reserva-view')
 
-@method_decorator(login_required(login_url='/accounts/login/'), name='dispatch')
+
+
+@user_passes_test(operator.attrgetter('is_staff'))
 class ReservaDeleteView(DeleteView):
     model = Reserva
     success_url = reverse_lazy('reserva-view')
@@ -142,6 +146,12 @@ def search_producto(request):
 	else:
 		return render(request, 'FooGearApp/search_producto.html', {})
 
+def products_index(request):
 
+    producto_gen = Producto.objects.order_by('?')[:4]
 
+    context = {
+        'producto_gen': producto_gen,
+    }
 
+    return render(request, 'FooGearApp/index.html', context)

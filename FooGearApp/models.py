@@ -19,6 +19,7 @@ class Producto(models.Model):
 	tipo = models.CharField(max_length=100)
 	marca = models.CharField(max_length=100)
 	precio = models.IntegerField()
+	imagen = models.ImageField(upload_to='productos')
 
 	def __str__(self):
 		return self.tipo

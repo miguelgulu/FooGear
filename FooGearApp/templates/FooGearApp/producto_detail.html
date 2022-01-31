@@ -5,20 +5,15 @@
 <br></br>
 <table border="1" align="center" width="500px">
   <tr>
-    <th span="1" style="width: 50%;">Marca</th>
-    <th span="1" style="width: 50%;">Precio</th>
+    <th span="1" style="width: 30%;">Marca</th>
+    <th span="1" style="width: 30%;">Precio</th>
+    <th span="1" style="width: 40%;">Imagen</th>
   </tr>
   <tr>
     <td>{{ producto.marca }}</td>
     <td>{{ producto.precio }}€</td>
+    <td><img src="/media/{{ producto.imagen }}" width="300" height="300"></td>
   </tr>
 </table> 
-<!--
-    <ul>
-        <ul>Talla: {{ producto.talla }}</ul>
-        <ul>Precio: {{ producto.precio }}</ul>
-    </ul>
 
-    <ul><a href="{% url 'index' %}">Volver a index</a></ul>
--->
 {% endblock %}
