@@ -57,12 +57,11 @@ urlpatterns = [
     path('reservas/<str:pk>/update', ReservaUpdateView.as_view(), name='reserva-update'),
     path('reservas/<str:pk>/delete/', ReservaDeleteView, name='reserva-delete'),
     path('accounts/', include('django.contrib.auth.urls')),
-    #path('login/', login_view, name='login'),
-    #path("logout/", LogoutView.as_view(), name="logout"),
     path("password/", change_password, name="change-password"),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('search_producto/', search_producto, name='search_producto'),
+    path(r'openid/', include('django_openid_auth.urls')), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'FooGearApp.views.error_404'
