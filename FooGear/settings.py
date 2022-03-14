@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'bootstrap4',
     'rest_framework',
     'django_openid_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -153,7 +157,34 @@ OPENID_CREATE_USERS = True
 OPENID_UPDATE_DETAILS_FROM_SREG = True
 OPENID_SSO_SERVER_URL = 'https://login.launchpad.net/'
 
+#--------------- Google OAuth -----------------
+
+SITE_ID = 2
+"""
+GOOGLEAUTH_CLIENT_ID = '941138713447-ntdhp9jmbqeln0ul8dd6e2tejjeglg94.apps.googleusercontent.com'
+GOOGLEAUTH_CLIENT_SECRET = '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'
+GOOGLEAUTH_CALLBACK_DOMAIN = ''
+GOOGLEAUTH_USE_HTTPS = False
+GOOGLEAUTH_APPS_DOMAIN = ''
+GOOGLEAUTH_GET_PROFILE = True
+GOOGLEAUTH_IS_STAFF = False
+GOOGLEAUTH_GROUPS = []
+"""
 AUTHENTICATION_BACKENDS = (
     'django_openid_auth.auth.OpenIDBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

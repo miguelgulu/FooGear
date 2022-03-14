@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView, products_index
-from FooGearApp.views import ReservaDetailView, ProductoDetailView 
+from FooGearApp.views import index, StockListView,  ReservaListView, CompradorListView, ProductoListView, TiendaListView, products_index, cookies
+from FooGearApp.views import ReservaDetailView, ProductoDetailView
 from FooGearApp.views import reserva, ReservaUpdateView, ReservaDeleteView, register, change_password
 from FooGearApp.views import search_producto
 from django.contrib.auth import views as auth_views
@@ -62,6 +62,9 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('search_producto/', search_producto, name='search_producto'),
     path(r'openid/', include('django_openid_auth.urls')), 
+    path('accounts/', include('allauth.urls')),
+    # Cookies
+    path('cookies/', cookies.as_view(), name='cookies')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'FooGearApp.views.error_404'

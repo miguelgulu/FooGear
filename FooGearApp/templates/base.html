@@ -3,6 +3,7 @@
 <head>
 
 
+
 <!-- Matomo -->
 <script>
   var _paq = window._paq = window._paq || [];
@@ -10,27 +11,30 @@
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
-    var u="http://127.0.0.1:8000/";
+    var u="http://127.0.0.1/";
     _paq.push(['setTrackerUrl', u+'matomo.php']);
-    _paq.push(['setSiteId', '2']);
+    _paq.push(['setSiteId', '5']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
 <!-- End Matomo Code -->
 
-
   {% block title %}<title>FooGear</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/stylefinal.css' %}">
+  <link rel="stylesheet"  href="{% static 'css/estilos.css' %}">
+  
 </head>
+
+
 
 <body>
 
+  
 <div class="topnav">
   <a class="active" href="{% url 'index' %}">Index</a>
   {% if not user.is_authenticated %}
@@ -93,13 +97,23 @@
 
 <div class="container-fluid" style="text-align: center;">
       {% block content %}
-   
+
+
+
       {% endblock %}
 </div>
  
+<div class="aviso-cookies" id="aviso-cookies">
+  <img class="galleta" src="../static/img/cookie.svg" alt="Galleta">
+  <h3 class="titulo">Cookies</h3>
+  <p class="parrafo">Utilizamos cookies propias y de terceros para mejorar nuestros servicios.</p>
+  <button class="boton" id="btn-aceptar-cookies">De acuerdo</button>
+  <a class="enlace" href="aviso-cookies.html">Aviso de Cookies</a>
+</div>
+<div class="fondo-aviso-cookies" id="fondo-aviso-cookies"></div>
 
-  </div>
-  <footer>
-  </footer>
+<script src="../static/js/aviso-cookies.js"></script>
+
+
 </body>
 </html>

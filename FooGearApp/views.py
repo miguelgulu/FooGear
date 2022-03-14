@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.template import loader
+from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from django.contrib import messages
@@ -155,3 +156,6 @@ def products_index(request):
     }
 
     return render(request, 'FooGearApp/index.html', context)
+
+class cookies(TemplateView):
+	template_name = "FooGearApp/aviso-cookies.html"
